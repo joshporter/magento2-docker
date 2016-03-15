@@ -1,0 +1,70 @@
+app:
+  image: mageinferno/magento2-nginx:1.9.9-1
+  links:
+    - php-fpm
+    - db
+    - redis
+  volumes_from:
+    - appdata
+    - logs
+  environment:
+    - APP_MAGE_MODE=developer
+    - VIRTUAL_HOST=m2.docker
+    - DNSDOCK_ALIAS=m2.docker
+
+appdata:
+  image: tianon/true
+  volumes:
+    - ./:/src
+    - ~/.composer:/root/.composer
+
+php-fpm:
+#  image: mageinferno/magento2-php:5.6.17-fpm-0
+#  image: mageinferno/magento2-php:7.0.2-fpm-0
+#  image: jporter/magento2-php-xdebug:7.0.2-fpm-0
+  image: jporter/magento2-php-xdebug:5.6.17-fpm-0
+  links:
+    - db
+  volumes_from:
+    - appdata
+  environment:
+    - APP_MAGE_MODE=development
+    - PHP_MEMORY_LIMIT=4G
+
+db:
+  image: mariadb:10.0.23
+  volumes_from:
+    - dbdata
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=magento2
+    - MYSQL_USER=magento2
+    - MYSQL_PASSWORD=magento2
+    - DNSDOCK_ALIAS=db.docker
+
+dbdata:
+  image: tianon/true
+  volumes:
+    - /var/lib/mysql
+
+redis:
+  image: redis
+  expose:
+    - "6379"
+
+logs:
+  image: tianon/true
+  volumes:
+    - /var/log/nginx
+    - /var/lib/elasticsearch
+
+elk:
+  image: willdurand/elk
+  volumes:
+      - ./tools/elk/logstash:/etc/logstash
+      - ./tools/elk/logstash/patterns:/opt/logstash/patterns
+  volumes_from:
+      - appdata
+      - logs
+  environment:
+      - DNSDOCK_ALIAS=logs.docker
