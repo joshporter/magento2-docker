@@ -25,6 +25,7 @@ php-fpm:
   image: jporter/magento2-php-xdebug:5.6.17-fpm-0
   links:
     - db
+    - mail
   volumes_from:
     - appdata
   environment:
@@ -68,3 +69,6 @@ elk:
       - logs
   environment:
       - DNSDOCK_ALIAS=logs.docker
+
+mail:
+  image: helder/mailcatcher

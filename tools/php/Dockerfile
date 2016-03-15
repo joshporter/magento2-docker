@@ -12,6 +12,10 @@ RUN pecl install -o -f xdebug; \
   	echo xdebug.remote_handler=dbgp >> /usr/local/etc/php/conf.d/xdebug.ini; \
   	echo xdebug.remote_log=/tmp/php5-xdebug.log >> /usr/local/etc/php/conf.d/xdebug.ini;
 
+RUN apt-get install -y ssmtp && \
+    echo "sendmail_path = /usr/sbin/ssmtp -t" > /usr/local/etc/php/conf.d/sendmail.ini && \
+    echo "mailhub=mail:25\nUseTLS=NO\nFromLineOverride=YES" > /etc/ssmtp/ssmtp.conf
+
 #FROM mageinferno/magento2-php:7.0.2-fpm-0
 #
 #RUN touch /usr/local/etc/php/conf.d/xdebug.ini; \
