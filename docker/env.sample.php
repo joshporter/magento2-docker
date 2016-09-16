@@ -1,28 +1,28 @@
 <?php
-return array (
+return array(
     'backend' =>
-        array (
+        array(
             'frontName' => 'admin',
         ),
     'install' =>
-        array (
+        array(
             'date' => 'Mon, 14 Mar 2016 17:21:07 +0000',
         ),
     'crypt' =>
-        array (
+        array(
             'key' => 'c583a5705198d0372534c140b2ed1f78',
         ),
     'session' =>
-        array (
+        array(
             'save' => 'db',
         ),
     'db' =>
-        array (
+        array(
             'connection' =>
-                array (
+                array(
                     'default' =>
-                        array (
-                            'host' => 'db.docker',
+                        array(
+                            'host' => 'db',
                             'dbname' => 'magento2',
                             'username' => 'magento2',
                             'password' => 'magento2',
@@ -30,16 +30,16 @@ return array (
                 ),
         ),
     'resource' =>
-        array (
+        array(
             'default_setup' =>
-                array (
+                array(
                     'connection' => 'default',
                 ),
         ),
     'x-frame-options' => 'SAMEORIGIN',
     'MAGE_MODE' => 'default',
     'cache_types' =>
-        array (
+        array(
             'config' => 1,
             'layout' => 1,
             'block_html' => 1,
@@ -54,15 +54,15 @@ return array (
             'config_webservice' => 1,
         ),
     'cache' =>
-        array (
+        array(
             'frontend' =>
-                array (
+                array(
                     'default' =>
-                        array (
+                        array(
                             'backend' => 'Cm_Cache_Backend_Redis',
                             'backend_options' =>
-                                array (
-                                    'server' => 'redis.docker',
+                                array(
+                                    'server' => 'redis',
                                     'port' => '6379',
                                     'persistent' => '',
                                     'database' => '0',
@@ -77,11 +77,11 @@ return array (
                                 ),
                         ),
                     'page_cache' =>
-                        array (
+                        array(
                             'backend' => 'Cm_Cache_Backend_Redis',
                             'backend_options' =>
-                                array (
-                                    'server' => 'redis.docker',
+                                array(
+                                    'server' => 'redis',
                                     'port' => '6379',
                                     'persistent' => '',
                                     'database' => '1',
