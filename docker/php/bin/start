@@ -1,0 +1,4 @@
+#!/bin/sh
+crontab -u www-data /tmp/crontab
+crond
+php-fpm

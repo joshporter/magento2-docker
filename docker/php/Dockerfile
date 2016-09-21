@@ -18,19 +18,15 @@ RUN docker-php-ext-install \
   xsl \
   zip
 
-RUN	mkdir ~/software && \
-	cd  ~/software/ && \
-	wget http://xdebug.org/files/xdebug-2.4.1.tgz && \
-	tar -xvzf xdebug-2.4.1.tgz && \
-	cd xdebug-2.4.1 && \
-	phpize && \
-	./configure && \
-	make && \
-	cp modules/xdebug.so /usr/local/lib/php/extensions/no-debug-non-zts-20151012
+RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 RUN echo "sendmail_path = /usr/sbin/ssmtp -t" > /usr/local/etc/php/conf.d/sendmail.ini && \
     echo "mailhub=mail:25\nUseTLS=NO\nFromLineOverride=YES" > /etc/ssmtp/ssmtp.conf
 
-COPY ./conf/php.ini /usr/local/etc/php
-COPY ./conf/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d
-COPY ./conf/php-fpm.conf /usr/local/etc/php-fpm.d
+COPY conf/php.ini /usr/local/etc/php
+COPY conf/crontab /tmp
+COPY conf/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d
+COPY conf/php-fpm.conf /usr/local/etc/php-fpm.d
+COPY bin/* /usr/local/bin/
+
+CMD ["/usr/local/bin/start"]
