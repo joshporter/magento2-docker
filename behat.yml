@@ -1,0 +1,30 @@
+default:
+  suites:
+    m2docker:
+      paths:
+        features: features/suites/m2docker
+      contexts:
+        - Context\HealthCheckContext
+  extensions:
+    Cjm\Behat\StepThroughExtension: ~
+    SensioLabs\Behat\PageObjectExtension:
+      namespaces:
+        page: [Page]
+    Behat\MinkExtension:
+      base_url: 'http://m2.docker'
+      sessions:
+        default:
+          selenium2:
+            wd_host: http://selenium:4444/wd/hub
+            browser: firefox
+      goutte:
+        guzzle_parameters:
+          curl.options:
+            CURLOPT_SSL_VERIFYPEER: false
+            CURLOPT_CERTINFO: false
+            CURLOPT_TIMEOUT: 120
+            ssl.certificate_authority: false
+      selenium2:
+        wd_host: http://selenium:4444/wd/hub
+        browser: firefox
+      show_tmp_dir: /tmp

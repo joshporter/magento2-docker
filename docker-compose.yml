@@ -22,6 +22,7 @@ php:
     - redis
     - mail
     - logs
+    - selenium
   volumes_from:
     - appdata
 
@@ -57,3 +58,8 @@ elk:
 
 mail:
   image: helder/mailcatcher
+
+selenium:
+  image: selenium/standalone-firefox
+  expose:
+    - "4444"
