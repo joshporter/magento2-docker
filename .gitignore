@@ -44,7 +44,6 @@ atlassian*
 !/docker-compose.yml
 !/phpspec.yml
 !/behat.yml
-!/package.json
 !/README.md
 
 **/node_modules/

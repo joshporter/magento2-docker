@@ -1,7 +1,7 @@
 bootstrap: 'app/autoload.php'
 suites:
   default:
-    src_path: 'src/'
+    src_path: 'app/code'
 formatter.name: pretty
 extensions:
     - Nagno\Phpspec\BootstrapMagento2\Bootstrap
