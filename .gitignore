@@ -45,6 +45,7 @@ atlassian*
 !/phpspec.yml
 !/behat.yml
 !/package.json
+!/README.md
 
 **/node_modules/
 npm-debug.log

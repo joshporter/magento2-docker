@@ -57,5 +57,3 @@ elk:
 
 mail:
   image: helder/mailcatcher
-  environment:
-    - VIRTUAL_HOST=mail.docker

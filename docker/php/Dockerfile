@@ -1,4 +1,5 @@
 FROM php:7.0-fpm-alpine
+MAINTAINER Josh Porter <josh@joshporter.co.uk>
 
 RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && \

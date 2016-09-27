@@ -1,4 +1,5 @@
 FROM nginx:stable-alpine
+MAINTAINER Josh Porter <josh@joshporter.co.uk>
 
 RUN set -x \
 #    && deluser www-data \
