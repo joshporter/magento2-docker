@@ -30,23 +30,25 @@ If you would like to use redis for FPC (you probably should), copy the supplied 
 cp docker/env-sample.php app/etc/env.php
 ```
 
-Run Magento 2 CLI installation command using that start PHP container:
+Run Magento 2 CLI installation command using that up and running 'php' container/service:
 
 ```
 docker-compose exec php php ./bin/magento setup:install --admin-firstname=admin --admin-lastname=admin --admin-email=admin@example.com --admin-user=admin --admin-password=123123pass --base-url=http://m2.docker/ --db-password=magento2 --db-host=mariadb.docker --db-name=magento2 --db-user=magento2 --language=en_GB --currency=GBP --timezone=Europe/London --session-save=db --use-sample-data
 # you might have to chmod +x ./bin/magento if you get permission errors
 ```
 
-This will install a Magento 2 instance with sample data, if you don't want this remove the flag `--use-sample-data`
+This will install a Magento 2 instance with sample data, if you don't want this data then remove the flag `--use-sample-data`
 
 ---
 
-To view the status of container:
+To view the status of the containers:
 ```
 dock-cli ps or docker-compose ps -q
 ```
 
-To start a shell in the web container, for debugging purposes:
+To start a shell in the web container/service, for debugging purposes:
 ```
 docker-compose exec web sh
 ```
+
+Credit to [Mage Inferno](https://github.com/mageinferno/docker-magento2-php) for some inspiration and ideas on how this could be down :+1:
