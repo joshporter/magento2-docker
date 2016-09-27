@@ -17,9 +17,8 @@ I also recommend using [docker-machine-nfs](https://github.com/adlogix/docker-ma
 
 `docker-machine-nfs $DOCKER_MACHINE_NAME --shared-folder=/Users/<username>`
 
----
 
-To Install:
+###Installation
 ```
 composer install
 dock-cli start OR docker-compose up -d
@@ -28,7 +27,7 @@ dock-cli start OR docker-compose up -d
 If you would like to use redis for FPC (you probably should), copy the supplied sample env file:
 
 ```
-`cp docker/env-sample.php app/etc/env.php`
+cp docker/env-sample.php app/etc/env.php
 ```
 
 Run Magento 2 CLI installation command using that start PHP container:
