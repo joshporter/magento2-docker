@@ -8,6 +8,7 @@ Magento 2.1.1 (with sample data) Docker dev environment which includes:
  - Redis
  - Mailcatcher (accessed via mail.docker)
  - ELK stack for logs
+ - Selenium for Behat tests
  
 This setup utilises the [dock-cli](https://github.com/inviqa/dock-cli) setup, which provides a DNSDock container,
 docker-machine and DNS management for the host machine. If you would like to use Docker for Mac, this setup
@@ -20,11 +21,11 @@ I also recommend using [docker-machine-nfs](https://github.com/adlogix/docker-ma
 
 ###Installation
 ```
-composer install
 dock-cli start OR docker-compose up -d
+docker-compose exec php ./bin/composer install
 ```
 
-If you would like to use redis for FPC (you probably should), copy the supplied sample env file:
+If you would like to use redis for caches and session storage, copy the supplied sample env file:
 
 ```
 cp docker/env-sample.php app/etc/env.php
@@ -51,4 +52,14 @@ To start a shell in the web container/service, for debugging purposes:
 docker-compose exec web sh
 ```
 
-Credit to [Mage Inferno](https://github.com/mageinferno/docker-magento2-php) for some inspiration and ideas on how this could be down :+1:
+There can be benefits in generating an optimized autoloader.
+```
+docker-compose exec php ./bin/composer dump-autoload -o
+```
+
+You can run behat tests:
+```
+docker-compose exec php ./bin/behat
+```
+
+Credit to [Mage Inferno](https://github.com/mageinferno/docker-magento2-php) for some inspiration and ideas on how all of this could be down :+1:
