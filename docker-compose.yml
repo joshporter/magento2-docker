@@ -7,8 +7,8 @@ web:
   volumes_from:
     - appdata
     - logs
-  environment:
-    DNSDOCK_ALIAS: m2.docker
+#  environment:
+#    DNSDOCK_ALIAS: m2.docker
 
 appdata:
   image: tianon/true
@@ -40,6 +40,15 @@ redis:
   image: redis
   expose:
     - "6379"
+
+varnish:
+  build: ./docker/varnish
+  volumes_from:
+    - appdata
+  links:
+    - web
+  environment:
+    DNSDOCK_ALIAS: m2.docker
 
 logs:
   image: tianon/true

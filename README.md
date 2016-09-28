@@ -6,6 +6,7 @@ Magento 2.1.1 (with sample data) Docker dev environment which includes:
  - Nginx (website configured with m2.docker alias)
  - MariaDB 
  - Redis
+ - Varnish 4.x
  - Mailcatcher (accessed via mail.docker)
  - ELK stack for logs
  - Selenium for Behat tests
@@ -25,8 +26,7 @@ dock-cli start OR docker-compose up -d
 docker-compose exec php ./bin/composer install
 ```
 
-If you would like to use redis for caches and session storage, copy the supplied sample env file:
-
+Copy the sample env.php over for some suggested settings (e.g use redis for session storage)
 ```
 cp docker/env-sample.php app/etc/env.php
 ```
