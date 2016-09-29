@@ -3,10 +3,11 @@ Magento 2 - Docker Compose
 
 Magento 2.1.1 (with sample data) Docker dev environment which includes:
  - PHP 7.0.x - Will use latest FPM alpine base image
- - Nginx (website configured with m2.docker alias)
+ - Nginx
  - MariaDB 
  - Redis
- - Varnish 4.x
+ - Varnish 4.x (If using dock-cli, it can be accessed via dnsdock alias: http://m2.docker)
+ - Node 6.7.x for frontend dependencies
  - Mailcatcher (accessed via mail.docker)
  - ELK stack for logs
  - Selenium for Behat tests
@@ -18,7 +19,6 @@ would need some slight tweaking, such as using a combination of [dnsmasq and ngi
 I also recommend using [docker-machine-nfs](https://github.com/adlogix/docker-machine-nfs):
 
 `docker-machine-nfs $DOCKER_MACHINE_NAME --shared-folder=/Users/<username>`
-
 
 ###Installation
 ```
@@ -39,6 +39,12 @@ docker-compose exec php php ./bin/magento setup:install --admin-firstname=admin 
 ```
 
 This will install a Magento 2 instance with sample data, if you don't want this data then remove the flag `--use-sample-data`
+
+Varnish can be turned by selecting the 'Varnish Cache' option via the admin dashboard: 
+`Stores > Configuration > Advanced > System > Full Page Cache > Caching Application`
+
+If you would like to see the magento debug headers, and also have the install set in developer mode, run this command:
+`docker-compose exec php ./bin/magento deploy:mode:set developer`
 
 ---
 
@@ -62,4 +68,9 @@ You can run behat tests:
 docker-compose exec php ./bin/behat
 ```
 
+To build the frontend dependencies, you can use the node container (`--rm` flag to remove container to keep setup clean)
+```
+docker-compose run --rm node npm install
+docker-compose run --rm node grunt <task>
+```
 Credit to [Mage Inferno](https://github.com/mageinferno/docker-magento2-php) for some inspiration and ideas on how all of this could be down :+1:
