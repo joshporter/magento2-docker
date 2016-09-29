@@ -45,6 +45,8 @@ atlassian*
 !/phpspec.yml
 !/behat.yml
 !/README.md
+!/Gruntfile.js
+!/package.json
 
 **/node_modules/
 npm-debug.log

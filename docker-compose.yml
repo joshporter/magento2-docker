@@ -72,3 +72,8 @@ selenium:
   image: selenium/standalone-firefox
   expose:
     - "4444"
+
+node:
+  build: ./docker/node
+  volumes_from:
+    - appdata
