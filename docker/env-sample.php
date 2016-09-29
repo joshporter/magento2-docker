@@ -1,44 +1,45 @@
 <?php
-return array(
+return array (
     'backend' =>
-        array(
+        array (
             'frontName' => 'admin_k7ip60',
         ),
     'crypt' =>
-        array(
+        array (
             'key' => '242c2f3519904b4d0283834fb8df0c26',
         ),
     'session' =>
-        array(
+        array (
             'save' => 'redis',
-            'redis' => array(
-                'host' => 'redis.docker',
-                'port' => '6379',
-                'password' => '',
-                'timeout' => '2.5',
-                'persistent_identifier' => '',
-                'database' => '0',
-                'compression_threshold' => '2048',
-                'compression_library' => 'gzip',
-                'log_level' => '1',
-                'max_concurrency' => '6',
-                'break_after_frontend' => '5',
-                'break_after_adminhtml' => '30',
-                'first_lifetime' => '600',
-                'bot_first_lifetime' => '60',
-                'bot_lifetime' => '7200',
-                'disable_locking' => '0',
-                'min_lifetime' => '60',
-                'max_lifetime' => '2592000',
-            )
+            'redis' =>
+                array (
+                    'host' => 'redis.docker',
+                    'port' => '6379',
+                    'password' => '',
+                    'timeout' => '2.5',
+                    'persistent_identifier' => '',
+                    'database' => '0',
+                    'compression_threshold' => '2048',
+                    'compression_library' => 'gzip',
+                    'log_level' => '1',
+                    'max_concurrency' => '6',
+                    'break_after_frontend' => '5',
+                    'break_after_adminhtml' => '30',
+                    'first_lifetime' => '600',
+                    'bot_first_lifetime' => '60',
+                    'bot_lifetime' => '7200',
+                    'disable_locking' => '0',
+                    'min_lifetime' => '60',
+                    'max_lifetime' => '2592000',
+                ),
         ),
     'db' =>
-        array(
+        array (
             'table_prefix' => '',
             'connection' =>
-                array(
+                array (
                     'default' =>
-                        array(
+                        array (
                             'host' => 'mariadb.docker',
                             'dbname' => 'magento2',
                             'username' => 'magento2',
@@ -51,16 +52,16 @@ return array(
                 ),
         ),
     'resource' =>
-        array(
+        array (
             'default_setup' =>
-                array(
+                array (
                     'connection' => 'default',
                 ),
         ),
     'x-frame-options' => 'SAMEORIGIN',
-    'MAGE_MODE' => 'default',
+    'MAGE_MODE' => 'developer',
     'cache_types' =>
-        array(
+        array (
             'config' => 1,
             'layout' => 1,
             'block_html' => 1,
@@ -77,14 +78,14 @@ return array(
             'compiled_config' => 1,
         ),
     'cache' =>
-        array(
+        array (
             'frontend' =>
-                array(
+                array (
                     'default' =>
-                        array(
+                        array (
                             'backend' => 'Cm_Cache_Backend_Redis',
                             'backend_options' =>
-                                array(
+                                array (
                                     'server' => 'redis.docker',
                                     'port' => '6379',
                                     'persistent' => '',
@@ -96,14 +97,14 @@ return array(
                                     'compress_data' => '1',
                                     'compress_tags' => '1',
                                     'compress_threshold' => '20480',
-                                    'compression_lib' => 'gzip'
+                                    'compression_lib' => 'gzip',
                                 ),
                         ),
                     'page_cache' =>
-                        array(
+                        array (
                             'backend' => 'Cm_Cache_Backend_Redis',
                             'backend_options' =>
-                                array(
+                                array (
                                     'server' => 'redis.docker',
                                     'port' => '6379',
                                     'persistent' => '',
@@ -115,13 +116,13 @@ return array(
                                     'compress_data' => '0',
                                     'compress_tags' => '1',
                                     'compress_threshold' => '20480',
-                                    'compression_lib' => 'gzip'
+                                    'compression_lib' => 'gzip',
                                 ),
                         ),
                 ),
         ),
     'install' =>
-        array(
+        array (
             'date' => 'Tue, 27 Sep 2016 12:51:30 +0000',
         ),
 );
