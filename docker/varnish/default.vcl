@@ -5,10 +5,14 @@ import std;
 backend default {
     .host = "web";
     .port = "80";
+  .connect_timeout = 240s;
+  .first_byte_timeout = 240s;
+  .between_bytes_timeout = 240s;
 }
 
 acl purge {
     "localhost";
+    "127.0.0.1";
 }
 
 sub vcl_recv {

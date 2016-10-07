@@ -4,19 +4,20 @@ Magento 2 - Docker Compose
 Magento 2.1.1 (with sample data) Docker dev environment which includes:
  - PHP 7.0.x - Will use latest FPM alpine base image
  - Nginx
+ - Self signed SSL (separate nginx container for ssl offloading, this is by default. Using dock-cli, it can be accessed via dnsdock alias: [https://m2.docker](https://m2.docker))
+ - Varnish 4.x
  - MariaDB 
  - Redis
- - Varnish 4.x (If using dock-cli, it can be accessed via dnsdock alias: http://m2.docker)
  - Node 6.7.x for frontend dependencies
- - Mailcatcher (accessed via mail.docker)
  - ELK stack for logs
+ - Mailcatcher (accessed via mail.docker)
  - Selenium for Behat tests
  
 This setup utilises the [dock-cli](https://github.com/inviqa/dock-cli) setup, which provides a DNSDock container,
 docker-machine and DNS management for the host machine. If you would like to use Docker for Mac, this setup
 would need some slight tweaking, such as using a combination of [dnsmasq and nginx proxy containers](https://adrianperez.org/improving-dev-environments-all-the-http-things/)
 
-I also recommend using [docker-machine-nfs](https://github.com/adlogix/docker-machine-nfs):
+I recommend using [docker-machine-nfs](https://github.com/adlogix/docker-machine-nfs):
 
 `docker-machine-nfs $DOCKER_MACHINE_NAME --shared-folder=/Users/<username>`
 
@@ -31,10 +32,10 @@ Copy the sample env.php over for some suggested settings (e.g use redis for sess
 cp docker/env-sample.php app/etc/env.php
 ```
 
-Run Magento 2 CLI installation command using that up and running 'php' container/service:
+Run Magento 2 CLI installation command with example settings:
 
 ```
-docker-compose exec php php ./bin/magento setup:install --admin-firstname=admin --admin-lastname=admin --admin-email=admin@example.com --admin-user=admin --admin-password=123123pass --base-url=http://m2.docker/ --db-password=magento2 --db-host=mariadb.docker --db-name=magento2 --db-user=magento2 --language=en_GB --currency=GBP --timezone=Europe/London --session-save=db --use-sample-data
+docker-compose exec php php ./bin/magento setup:install --admin-firstname=admin --admin-lastname=admin --admin-email=admin@example.com --admin-user=admin --admin-password=123123pass --base-url=https://m2.docker/ --base-url-secure=https://m2.docker/ --use-secure=1 --use-secure-admin=1 --db-password=magento2 --db-host=mariadb.docker --db-name=magento2 --db-user=magento2 --language=en_GB --currency=GBP --timezone=Europe/London --use-sample-data
 # you might have to chmod +x ./bin/magento if you get permission errors
 ```
 
@@ -43,8 +44,18 @@ This will install a Magento 2 instance with sample data, if you don't want this 
 Varnish can be turned by selecting the 'Varnish Cache' option via the admin dashboard: 
 `Stores > Configuration > Advanced > System > Full Page Cache > Caching Application`
 
-If you would like to see the magento debug headers, and also have the install set in developer mode, run this command:
-`docker-compose exec php ./bin/magento deploy:mode:set developer`
+You can then clear the cache:
+```
+docker-compose exec php ./bin/magento cache:clean
+```
+
+If you would like to see the magento debug headers, and also have the installation set to developer mode:
+`docker-compose exec php ./bin/magento deploy:mode:set developer` 
+
+You might need to remove the generation folder if you get an error:
+```
+rm -rf var/generation/*
+```
 
 ---
 
@@ -68,7 +79,7 @@ You can run behat tests:
 docker-compose exec php ./bin/behat
 ```
 
-To build the frontend dependencies, you can use the node container (`--rm` flag to remove container to keep setup clean)
+To build the frontend dependencies, you can use the node container (`--rm` flag to remove containers once completed, to keep setup clean)
 ```
 docker-compose run --rm node npm install
 docker-compose run --rm node grunt <task>

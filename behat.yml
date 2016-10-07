@@ -11,7 +11,7 @@ default:
       namespaces:
         page: [Page]
     Behat\MinkExtension:
-      base_url: 'http://m2.docker'
+      base_url: 'https://m2.docker'
       sessions:
         default:
           selenium2:

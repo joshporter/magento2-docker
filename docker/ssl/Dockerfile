@@ -8,3 +8,5 @@ RUN set -x \
 
 COPY nginx.conf /etc/nginx
 COPY *.conf /etc/nginx/conf.d/
+COPY m2docker.cert /etc/ssl
+COPY m2docker.key /etc/ssl

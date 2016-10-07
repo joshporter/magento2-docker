@@ -1,3 +1,20 @@
+ssl:
+  build: ./docker/ssl
+  links:
+    - varnish
+  volumes_from:
+    - appdata
+    - logs
+  environment:
+    DNSDOCK_ALIAS: m2.docker
+
+varnish:
+  build: ./docker/varnish
+  links:
+    - web
+  volumes_from:
+    - appdata
+
 web:
   build: ./docker/nginx
   links:
@@ -7,8 +24,6 @@ web:
   volumes_from:
     - appdata
     - logs
-#  environment:
-#    DNSDOCK_ALIAS: m2.docker
 
 appdata:
   image: tianon/true
@@ -41,14 +56,6 @@ redis:
   expose:
     - "6379"
 
-varnish:
-  build: ./docker/varnish
-  volumes_from:
-    - appdata
-  links:
-    - web
-  environment:
-    DNSDOCK_ALIAS: m2.docker
 
 logs:
   image: tianon/true
@@ -69,7 +76,7 @@ mail:
   image: helder/mailcatcher
 
 selenium:
-  image: selenium/standalone-firefox
+  image: selenium/standalone-firefox:2.53.1
   expose:
     - "4444"
 

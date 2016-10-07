@@ -123,6 +123,13 @@ return array (
         ),
     'install' =>
         array (
-            'date' => 'Tue, 27 Sep 2016 12:51:30 +0000',
+            'date' => 'Thu, 29 Sep 2016 10:58:33 +0000',
+        ),
+    'http_cache_hosts' =>
+        array (
+            0 =>
+                array (
+                    'host' => 'm2.docker',
+                ),
         ),
 );
