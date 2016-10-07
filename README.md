@@ -10,7 +10,7 @@ Magento 2.1.1 (with sample data) Docker dev environment which includes:
  - Redis
  - Node 6.7.x for frontend dependencies
  - ELK stack for logs
- - Mailcatcher (accessed via mail.docker)
+ - Mailcatcher (accessed via mailcatcher.docker)
  - Selenium for Behat tests
  
 This setup utilises the [dock-cli](https://github.com/inviqa/dock-cli) setup, which provides a DNSDock container,
