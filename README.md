@@ -49,14 +49,6 @@ You can then clear the cache:
 docker-compose exec php ./bin/magento cache:clean
 ```
 
-If you would like to see the magento debug headers, and also have the installation set to developer mode:
-`docker-compose exec php ./bin/magento deploy:mode:set developer` 
-
-You might need to remove the generation folder if you get an error:
-```
-rm -rf var/generation/*
-```
-
 ---
 
 To view the status of the containers:
